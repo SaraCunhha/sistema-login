@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const Container  = styled.div`
 display: flex;
 align-itemss: center;
@@ -41,3 +42,8 @@ a {
     color: #676767;
 }
 `;
+
+
+
+  
+  

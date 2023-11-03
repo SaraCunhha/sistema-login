@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Input from "../../components/Input";
 import Button from "../../components/button";
-import * as C from "./styles";
+import { Container, Label, Content } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const Signup = () => {
-  const [email,setEmail] = useState("")
+  const [email, setEmail] = useState("");
   const [emailConf, setEmailConf] = useState("");
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
@@ -14,7 +14,7 @@ const Signup = () => {
 
   const { signup } = useAuth();
 
-  const handleSignup =() => {
+  const handleSignup = () => {
     if (!email | emailConf | !senha) {
       setError("Preencha todos os campos");
       return;
@@ -38,9 +38,9 @@ const Signup = () => {
 
 
   return (
-    <C.Container>
-      <C.Label>Sistema de LOGIN</C.Label>
-      <C.Content>
+    <Container>
+      <Label>SISTEMA DE LOGIN</Label>
+      <Content>
         <Input
         type="email"
         placeholder="Digite seu E-mail"
@@ -58,17 +58,16 @@ const Signup = () => {
         placeholder="Digite sua senha"
         onChange={(e) => [setSenha(e.target.value), setError("")]}
         />
-        <C.labelError>{error}</C.labelError>
+        <labelError>{error}</labelError>
         <Button Text="Inscrever-se" onClick={handleSignup} />
-        <C.LabelSignin>
           Já tem uma conta?
-          <C.Strong>
+          
             <Link to="/">&nbsp;Entre</Link>
-          </C.Strong>
-        </C.LabelSignin>
-      </C.Content>
-    </C.Container>
+        
+       
+      </Content>
+    </Container>
  
   );
 };
-export default Signup
+export default Signup;

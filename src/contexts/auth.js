@@ -4,11 +4,11 @@ import { createContext, useEffect, useState } from "react";
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState();
 
     useEffect(() => {
         const userToken = localStorage.getItem("user_token");
-        const userStorage = localStorage.getItem("users_db");
+        const userStorage = localStorage.getItem("users_bd");
 
         if (userToken && userStorage) {
             const hasUser = JSON.parse(userStorage)?.filter(
@@ -44,8 +44,8 @@ export const AuthProvider = ({ children }) => {
     
     };   
 
-    const signup = (email,password) => {
-        const usersStorage = JSON.parse(localStorage.getItem("users_db"));
+    const signup = (email, password) => {
+        const usersStorage = JSON.parse(localStorage.getItem("users_bd"));
 
         const hasUser = usersStorage?.filter((user) => user.email === email);
 
@@ -56,12 +56,12 @@ export const AuthProvider = ({ children }) => {
         let newUser;
 
         if (usersStorage) {
-            newUser = [...usersStorage, { email, password}];
+            newUser = [...usersStorage, { email, password }];
         } else {
-            newUser = [{ email, password}]
+            newUser = [{ email, password }];
         }
 
-        localStorage.setItem("users_db", JSON.stringify(newUser));
+        localStorage.setItem("users_bd", JSON.stringify(newUser));
         
         return;
     };
@@ -72,10 +72,12 @@ export const AuthProvider = ({ children }) => {
     };
 
 
-    return <AuthContext.Provider
-        value={{ user, signed: !!user,signin, signup, signout}}
+    return (
+    <AuthContext.Provider
+        value={{ user, signed: !!user,signin, signup, signout }}
         >
         
         {children}
         </AuthContext.Provider>
+    );
 };
